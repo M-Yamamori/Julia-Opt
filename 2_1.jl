@@ -23,4 +23,3 @@ println("x3 = ", JuMP.value(x3))
 println("Dual Variables:")
 println("dual1 = ", JuMP.shadow_price(constraint1))
 println("dual2 = ", JuMP.shadow_price(constraint2))
-
