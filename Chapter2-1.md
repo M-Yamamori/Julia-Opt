@@ -9,6 +9,7 @@ $ x_1 \geq 0.0 $
 $ x_1 \leq 10.0 $  
 $ x_2 \geq 0.0 $  
 $ x_3 \geq 0.0 $  
+(https://scrapbox.io/kklab-ise-ag/Chapter2-1_Model)
 <br>
 
 - Code
@@ -48,4 +49,5 @@ $ x_3 = 0.9375 $
 Dual Variables:  
 $ dual1 = 1.8125 $  
 $ dual2 = 0.06249999999999998 $  
+(https://scrapbox.io/kklab-ise-ag/Chapter2-1_Result)
 <br>
