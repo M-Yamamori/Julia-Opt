@@ -1,19 +1,18 @@
 # 2.1 Linear Programming Problems
 
 - Model  
-Max $ x_1 + 2x_2 + 5x_3 $  
+Max [$ x_1 + 2x_2 + 5x_3]  
 Subject to  
-constraint1 : $ -x_1 + x_2 + 3x_3 \leq -5.0 $  
-constraint2 : $ x_1 + 3x_2 - 7x_3 \leq 10.0 $  
-$ x_1 \geq 0.0 $  
-$ x_1 \leq 10.0 $  
-$ x_2 \geq 0.0 $  
-$ x_3 \geq 0.0 $  
+constraint1 : [$ -x_1 + x_2 + 3x_3 \leq -5.0]  
+constraint2 : [$ x_1 + 3x_2 - 7x_3 \leq 10.0]  
+[$ 0.0 \leq x_1 \leq 10.0]  
+[$ x_2 \geq 0.0]  
+[$ x_3 \geq 0.0]  
 (https://scrapbox.io/kklab-ise-ag/Chapter2-1_Model)
 <br>
 
 - Code
-```julia:2.1_LinearProgrammingPloblems.jl
+```julia:2.1
 using JuMP, GLPK
 
 m = Model(GLPK.Optimizer)
@@ -43,11 +42,11 @@ println("dual2 = ", JuMP.shadow_price(constraint2))
 <br>
 
 - Result  
-$ x_1 = 10.0 $  
-$ x_2 = 2.1875 $  
-$ x_3 = 0.9375 $  
+[$ x_1 = 10.0]  
+[$ x_2 = 2.1875]  
+[$ x_3 = 0.9375]  
 Dual Variables:  
-$ dual1 = 1.8125 $  
-$ dual2 = 0.06249999999999998 $  
+[$ dual1 = 1.8125]  
+[$ dual2 = 0.06249999999999998]  
 (https://scrapbox.io/kklab-ise-ag/Chapter2-1_Result)
 <br>
