@@ -54,6 +54,12 @@ Dual Variables:
 (https://scrapbox.io/kklab-ise-ag/Chapter2-2)
 <br>
 
+- Note  
+```julia:2.1_LinearProgrammingPloblems.jl
+for i in 1:3
+  println("x[$i] = ", JuMP.value(x[i]))
+end
+```
 
-
+"x[$i] = "
 
