@@ -1,4 +1,4 @@
-# 2.2 Another ways of writing LP Problems
+# 2.2 Alternative Ways of Writing LP Problems
 
 - Model  
 Max [$ \sum_{i=0}^3 c_ix_i]  
@@ -14,7 +14,7 @@ Subject to
 <br>
 
 - Code
-```julia:2.1_LinearProgrammingPloblems.jl
+```julia:2.2
 using JuMP, GLPK
 
 m = Model(GLPK.Optimizer)
