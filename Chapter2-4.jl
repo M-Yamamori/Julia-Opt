@@ -3,8 +3,8 @@ using JuMP, GLPK
 m = Model(GLPK.Optimizer)
 
 @variable(m, 0<= x1 <=10)
-@variable(m, x2 >=0, Int)
-@variable(m, x3, Bin)
+@variable(m, x2 >=0, Int) #Add Int
+@variable(m, x3, Bin) #Add Bin
 
 @objective(m, Max, x1 + 2x2 + 5x3)
 
