@@ -14,7 +14,7 @@ Subject to
 <br>
 
 - Code
-```julia:2.2
+```julia
 using JuMP, GLPK
 
 m = Model(GLPK.Optimizer)
