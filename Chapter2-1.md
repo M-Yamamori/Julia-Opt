@@ -12,7 +12,7 @@ constraint2 : [$ x_1 + 3x_2 - 7x_3 \leq 10.0]
 <br>
 
 - Code
-```julia:2.1
+```julia
 using JuMP, GLPK
 
 m = Model(GLPK.Optimizer)
