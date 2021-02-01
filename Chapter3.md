@@ -46,7 +46,7 @@ This result is
 If we want steps of 3, we do 1:3:9, and it refers to 1, 4, and 7.  
 <br>
 
-# 3.4 Printing Messages
+## 3.4 Printing Messages
 Combining the custom text with values in a variable is easy, It works for arrays
 ```julia
 b = [1; 3; 10]
@@ -60,3 +60,51 @@ The result is `b is [1,3,10].`
 println("The second element of b is $(b[2]).")
 ```
 The result is `The second element of b is 3.`  
+<br>
+
+## 3.5 Collection, Dictionary, and For-Loop  
+Suppose we have the following data about a network.  
+```julia
+links = [ (1,2), (3,4), (4,2) ]
+link_costs = [ 5, 13, 8 ]
+```
+Create a dictionary for this data.
+```julia
+link_dict = Dict()
+for i in 1:length(links)
+    link_dict[ links[i] ] = link_costs[i]
+end
+println(link_dict)
+```
+```
+Dict{Any,Any}((1, 2) => 5,(4, 2) => 8,(3, 4) => 13)
+```  
+Then we can use it like this 
+```julia
+for (link, cost) in link_dict
+    println("Link $link has cost of $cost.")
+end
+```
+```
+Link (1, 2) has cost of 5.
+Link (4, 2) has cost of 8. 
+Link (3, 4) has cost of 13.
+```
+<br>
+
+## 3.6 Function  
+We can create a Julia function as follows  
+```julia
+function f(x,y)
+  return 3x + y
+end
+```
+We also can define the same function in more compact form, called “assignment form”.  
+```julia
+f(x,y) = 3x+y
+```
+<br>
+
+## 3.7 Scope of Variables  
+- scope block
+- global, local, and const
