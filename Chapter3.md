@@ -31,7 +31,7 @@ a = [10; 20; 30; 40; 50; 60; 70; 80; 90]
 ```julia
 a[1:3]
 ```
-This result is 
+This result is  
 10  
 20  
 30  
