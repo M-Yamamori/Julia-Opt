@@ -21,7 +21,7 @@ is same as
 ```julia
 pairs = [ (1,2); (2,3); (3,4) ]
 ```
-This array type can be useful for handling network data, like(i,j).  
+This array type can be useful for handling network data, like(i, j).  
 <br>
 
 ## 3.3 Indices and Ranges  
@@ -106,5 +106,35 @@ f(x,y) = 3x+y
 <br>
 
 ## 3.7 Scope of Variables  
-- scope block
-- global, local, and const
+```julia
+function f(x)
+  return x+2
+end
+
+function g(x)
+  return 3x+3
+end
+```
+In this code, x is used in two different functions, but they do not conflict. This is because they are defined in different **scope blocks**.  
+```julia
+function f2(x)
+  a = 0
+  return x+a
+end
+
+a = 5
+println(f2(1))
+println(a)
+```
+This result will be   
+```
+1
+5
+```
+The same **a** variable name is used in two different places, and it can be confusing and may lead to bugs. To control the scope of variables, we can use keywords like **global**, **local**, and **const**.  
+<br>
+
+- Note  
+Global variable: A variable that can be used in multiple functions.  
+Local variable: A variable that can be used only in one function.  
+Const: Variables with unchanging values can be conveyed to the compiler using the ```const``` keyword. The ```const``` declaration should only be used in global scope.  
