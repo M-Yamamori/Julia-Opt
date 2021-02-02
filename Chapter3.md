@@ -79,6 +79,19 @@ println(link_dict)
 ```
 Dict{Any,Any}((1, 2) => 5,(4, 2) => 8,(3, 4) => 13)
 ```  
+You also can specify the type.  
+```julia
+link_dict = Dict{Tuple{Int64,Int64},Int64}()
+for i in 1:length(links)
+    link_dict[ links[i] ] = link_costs[i]
+end
+println(link_dict)
+```
+```
+Dict((1, 2) => 5,(4, 2) => 8,(3, 4) => 13)
+```
+
+
 Then we can use it like this 
 ```julia
 for (link, cost) in link_dict
@@ -101,25 +114,25 @@ end
 ```
 We also can define the same function in more compact form, called “assignment form”.  
 ```julia
-f(x,y) = 3x+y
+f(x,y) = 3x + y
 ```
 <br>
 
 ## 3.7 Scope of Variables  
 ```julia
 function f(x)
-  return x+2
+  return x + 2
 end
 
 function g(x)
-  return 3x+3
+  return 3x + 3
 end
 ```
 In this code, x is used in two different functions, but they do not conflict. This is because they are defined in different **scope blocks**.  
 ```julia
 function f2(x)
   a = 0
-  return x+a
+  return x + a
 end
 
 a = 5
