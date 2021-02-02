@@ -18,6 +18,11 @@ println("Optimal Solutions:")
 for i in 1:3
   println("x[$i] = ", JuMP.value(x[i]))
 end
+#=
+for i in 1:3
+  println("x[$i] = $(JuMP.value(x[i]))")
+end
+=#
 
 println("Dual Variables:")
 for j in 1:2
