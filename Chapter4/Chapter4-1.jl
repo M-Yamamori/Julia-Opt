@@ -7,7 +7,7 @@ ydata = [ 0.73; 0.19; 1.54; 2.08; 0.84; 0.42; 1.77; 0.86; 1.95; 0.27; 0.39; 1.39
 model(x, beta) = beta[1] * ((x/beta[2]).^(beta[3]-1)) .* (exp.( - (x/beta[2]).^beta[3] ))
 
 #Curve fitting algorithm
-fit = curve_fit(model, xdata, ydata, [3.0, 8.0, 3.0]) #LsqFit #[3.0, 8.0, 3.0] --> initial guess
+fit = curve_fit(model, xdata, ydata, [3.0, 8.0, 3.0]) #LsqFit
 
 #Results
 beta_fit = fit.param
@@ -20,7 +20,6 @@ yfit = model(xfit, fit.param)
 
 fig = figure()
 
-#=
 #Plot
 plot(xdata, ydata, color = "black", linewidth = 2.0, marker = "o", linestyle = "None")
 plot(xfit, yfit, color = "red", linewidth = 2.0)
@@ -32,4 +31,3 @@ ylabel("y", fontsize="xx-large")
 savefig("fit_plot.pdf")
 
 close(fig)
-=#
