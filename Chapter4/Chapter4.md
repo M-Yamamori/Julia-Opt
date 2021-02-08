@@ -86,4 +86,13 @@ hessian(g, [3.0, 1.0, 2.0]) #At the same point
 <br>
 
 ## 4.3 Numerical Integration  
+The most obvious way of approximating Riemann integral is using the Riemann sum. However, left Riemann sum underestimates the integral, and the right Riemann sum overestimates. The average of two would be a good approximation. It is called the **trapezoidal sum**. In julia, [QuadGK package](https://github.com/JuliaMath/QuadGK.jl) provides the approximation.  
+```julia
+f(x) = - cos(3x) + x^2 * exp(-x)
+quadgk(f, 0.0, 1.0) #QuadGK
+```
+The result is ```(0.11356279145616598,2.123301534595612e-14)```  
+<br>
+
 ## 4.4 Automatic Differentiation
+While numerical differentiation based on finite differences has been popularly used, there are errors from finite differencing. A new paradigm, **automatic differentiation (AD)** on differentiation using computers has risen. AD computes the derivatives without significant computational efforts. There is [ForwardDiff package](https://github.com/JuliaDiff/ForwardDiff.jl) to see how we can use AD in Julia.  
