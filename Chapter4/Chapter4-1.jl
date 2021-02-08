@@ -8,6 +8,7 @@ model(x, beta) = beta[1] * ((x/beta[2]).^(beta[3]-1)) .* (exp.( - (x/beta[2]).^b
 
 #Curve fitting algorithm
 fit = curve_fit(model, xdata, ydata, [3.0, 8.0, 3.0]) #LsqFit
+println(fit)
 
 #Results
 beta_fit = fit.param
@@ -20,6 +21,7 @@ yfit = model(xfit, fit.param)
 
 fig = figure()
 
+#=
 #Plot
 plot(xdata, ydata, color = "black", linewidth = 2.0, marker = "o", linestyle = "None")
 plot(xfit, yfit, color = "red", linewidth = 2.0)
@@ -31,3 +33,4 @@ ylabel("y", fontsize="xx-large")
 savefig("fit_plot.pdf")
 
 close(fig)
+=#
