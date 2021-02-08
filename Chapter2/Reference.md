@@ -1,0 +1,2 @@
+- [Julia Programming for Operations Research Chapter2](https://www.softcover.io/read/7b8eb7d0/juliabook/simple)
+- https://github.com/chkwon/jpor_codes/tree/master/chap2
