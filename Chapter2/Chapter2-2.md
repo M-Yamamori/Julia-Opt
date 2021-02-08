@@ -1,7 +1,7 @@
 # 2.2 Alternative Ways of Writing LP Problems
 
 - Model  
-Max [$ \sum_{i=0}^3 c_ix_i]  
+Max [$ \sum_{i=1}^3 c_ix_i]  
 [$ \bm{c} = \begin{bmatrix} 1\\ 2\\ 5\\ \end{bmatrix}]  
 Subject to  
 [$ \bm{Ax} \leq \bm{b}]  
