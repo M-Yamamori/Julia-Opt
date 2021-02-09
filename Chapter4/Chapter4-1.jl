@@ -21,7 +21,6 @@ yfit = model(xfit, fit.param)
 
 fig = figure()
 
-#=
 #Plot
 plot(xdata, ydata, color = "black", linewidth = 2.0, marker = "o", linestyle = "None")
 plot(xfit, yfit, color = "red", linewidth = 2.0)
@@ -33,4 +32,3 @@ ylabel("y", fontsize="xx-large")
 savefig("fit_plot.pdf")
 
 close(fig)
-=#
