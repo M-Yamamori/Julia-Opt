@@ -77,7 +77,7 @@ Given a function f(x), we often need to compute its derivative without actually 
 ```julia
 using Calculus
 f(x) = x^3 * exp(x) + sin(x)
-der = derivative(f, 1.0))
+der = derivative(f, 1.0)
 secDer = second_derivative(f, 1.0)
 println("Derivative: ", der)
 println("Second derivative: ", secDer)
