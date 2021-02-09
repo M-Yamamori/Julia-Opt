@@ -14,7 +14,7 @@ The most popular definition of the best match or best fit is based on the **leas
 
 - Code  
 ```julia
-using LsqFit #Package of Levenberg-Marquardt algorithm
+using LsqFit
 using PyPlot
 
 xdata = [ 15.2; 19.9;  2.2; 11.8; 12.1; 18.1; 11.8; 13.4; 11.5;  0.5; 18.0; 10.2; 10.6; 13.8;  4.6;  3.8; 15.1; 15.1; 11.7;  4.2 ]
