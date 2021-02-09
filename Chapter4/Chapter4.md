@@ -118,6 +118,7 @@ hessian(g, [3.0, 1.0, 2.0]) #At the same point
 ## 4.3 Numerical Integration  
 The most obvious way of approximating Riemann integral is using the Riemann sum. However, left Riemann sum underestimates the integral, and the right Riemann sum overestimates. The average of two would be a good approximation. It is called the **trapezoidal sum**. In julia, [QuadGK package](https://github.com/JuliaMath/QuadGK.jl) provides the approximation.  
 ```julia
+using QuadGK
 f(x) = - cos(3x) + x^2 * exp(-x)
 println(quadgk(f, 0.0, 1.0)) #QuadGK
 ```
