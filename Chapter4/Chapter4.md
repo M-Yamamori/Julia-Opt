@@ -90,8 +90,24 @@ Second derivatrive: 34.49618758929225
 If the function has multiple variables, we can compute the gradient and hessian.  
 ```julia
 g(x) = (x[1])^2 * sin(3x[2]) + exp(-2x[3])
+```
+```julia
 Calculus.gradient(g, [3.0, 1.0, 2.0]) #At [3.0,1.0,2.0]
+```
+```
+3-element Array{Float64,1}:
+   0.8467200483621847
+ -26.729797406378975
+  -0.03663127778181647
+```
+```julia
 hessian(g, [3.0, 1.0, 2.0]) #At the same point
+```
+```
+3×3 Array{Float64,2}:
+   0.282241  -17.8199  0.0
+ -17.8199    -11.4307  0.0
+   0.0         0.0     0.0732632
 ```
 <br>
 
