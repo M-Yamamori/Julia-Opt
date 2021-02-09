@@ -136,6 +136,7 @@ While numerical differentiation based on finite differences has been popularly u
 using ForwardDiff
 f(x) = (x-1) * (x+3) / x
 g = x -> ForwardDiff.derivative(f, x)
+#g(x) = ForwardDiff.derivative(f, x)
 println(g(2))
 ```
 The result is ```1.75```  
