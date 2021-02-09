@@ -30,5 +30,3 @@ ylabel("y", fontsize="xx-large")
 
 #Save the figure PDF
 savefig("fit_plot.pdf")
-
-close(fig)
