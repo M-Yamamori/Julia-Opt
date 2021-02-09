@@ -123,6 +123,11 @@ f(x) = - cos(3x) + x^2 * exp(-x)
 println(quadgk(f, 0.0, 1.0)) #QuadGK
 ```
 The result is ```(0.11356279145616598,2.123301534595612e-14)```  
+```0.11356279145616598``` is the integral value, and ```2.123301534595612e-14``` is the error.  
+<br>
+
+- Note  
+We also can add the size of the interval in the fourth argument.  
 <br>
 
 ## 4.4 Automatic Differentiation
@@ -141,22 +146,13 @@ using ForwardDiff
 f(x) = (x[1]-2) * exp(x[2]) - sin(x[3])
 g = x -> ForwardDiff.gradient(f, x)
 h = x -> ForwardDiff.hessian(f, x)
-```
-```julia
-g([3.0, 2.0, 1.0])
-```
-```
-  7.38905609893065
-  7.38905609893065
- -0.5403023058681398
-```
-```julia
-h([3.0, 2.0, 1.0])
+
+println(g([3.0, 2.0, 1.0]))
+println(h([3.0, 2.0, 1.0]))
 ```
 ```
- 0.0      7.38906  0.0
- 7.38906  7.38906  0.0
- 0.0      0.0      0.841471
+[7.38905609893065, 7.38905609893065, -0.5403023058681398]
+[0.0 7.38905609893065 0.0; 7.38905609893065 7.38905609893065 0.0; 0.0 0.0 0.8414709848078965]
 ```
 <br>
 
