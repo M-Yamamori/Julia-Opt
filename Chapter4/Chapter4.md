@@ -54,18 +54,21 @@ errors: [1.2405974791377639, 1.410107749203087, 0.40157516056225456]
 
 - Note  
 1. ```model(x, p)``` will accept the full data set as the first argument `x`.
-  ```julia
-  julia> model(x, beta) = beta[1] * ((x/beta[2]).^(beta[3]-1)) .* (exp.( - (x/beta[2]).^beta[3] )) 
-  ```
-  ```
-  model (generic function with 1 method)
-  ```
+    ```julia
+    julia> model(x, beta) = beta[1] * ((x/beta[2]).^(beta[3]-1)) .* (exp.( - (x/beta[2]).^beta[3] )) 
+    ```
+    ```
+    model (generic function with 1 method)
+    ```
 
-2. [3.0, 8.0, 3.0] --> initial point  
+2. [3.0, 8.0, 3.0] --> initial point of beta  
     ```fit``` is a composite type (LsqFitResult)  
+    ```
+    LsqFit.LsqFitResult{Array{Float64,1},Array{Float64,1},Array{Float64,2},Array{Float64,1}}([4.459414325739468, 10.254403821589335, 1.8911376587662427], [0.04161413386011037, 0.05221091863859073, -0.46866129811863844, -0.7083121787863045, 0.4765373986997933, -0.024386779602917685, -0.3983121787863044, 0.21771927819488834, -0.5237022566251304, 0.03110900166434749, 0.01586650853748489, 0.2591937666305997, 0.3338590107858692, 0.24620338748550252, -0.23748009950604576, 0.04993492123876897, -0.07261618564362982, 0.26738381435637015, -0.15003460113143152, 0.623123393632806], [0.17303037517644 0.2324956738793641 -0.33559542609373644; 0.05431451328554104 0.13546244655765333 -0.40208226134245884; … ; 0.31169236525653793 0.20815989726988657 -0.05192522251708009; 0.37518904309453943 -0.08835397600592586 -1.217362278281968], true, Float64[])
+    ```
 
 3. Obtained parameter values.  
-  fit.resid: residuals = vector of residuals  
+    fit.resid: residuals = vector of residuals  
 <br>
 
 ## 4.2 Numerical Differentiation  
