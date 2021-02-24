@@ -1,7 +1,7 @@
 ## 5.2 Searching All Basic Feasible Solutions  
 In this chapter, we try to search all BFS.  
 <br>
-First, I want to think about ```isnonnegative function```.  
+First, I want to think about isnonnegative function.  
 ```x[x.<0]``` will return the elements of vector x that is less than 0, since ```x.<0``` is an element-wise comparison with 0.  
 
 ```julia
@@ -23,8 +23,8 @@ julia> x[x.<0]
  -2
 ```
 - Note  
-[About BitArray](https://docs.julialang.org/en/v1/base/arrays/#Base.BitArray-Tuple{UndefInitializer,Vararg{Integer,N}%20where%20N}
-) 
+About [BitArray](https://docs.julialang.org/en/v1/base/arrays/#Base.BitArray-Tuple{UndefInitializer,Vararg{Integer,N}%20where%20N}
+)
 
 ```length(x[x.<0])``` will return the number of the negative elements. 
 ```julia
@@ -53,12 +53,49 @@ julia> length(x[x.<0]) == 0
 true
 ```
 
-Therefore, the ```isnonnegative function``` can judge whether the given vector is nonnegative or not.
+Therefore, the isnonnegative function can judge whether the given vector is nonnegative or not.
 ```julia
 function isnonnegative(x::Array{Float64, 1})
   return length( x[ x .< 0] ) == 0
 end
 ```
-
 <br>
 
+Next, we want to think about search_BFS function.
+```julia
+function search_BFS(c, A, b)
+    m, n = size(A)
+    @assert rank(A) == m
+
+    opt_x = zeros(n) #n-zero vector
+    obj = Inf
+
+    for b_idx in combinations(1:n, m)
+        B = A[:, b_idx]
+        c_B = c[b_idx]
+        x_B = inv(B) * b
+
+        if is_nonnegative(x_B)
+            z = dot(c_B, x_B)
+            if z < obj
+                obj = z
+                opt_x = zeros(n)
+                opt_x[b_idx] = x_B
+            end
+        end
+
+        println("Basis:", b_idx)
+        println("\t x_B = ", x_B)
+        println("\t nonnegative? ", is_nonnegative(x_B))
+
+        if is_nonnegative(x_B)
+            println("\t obj = ", dot(c_B, x_B))
+        end
+
+    end
+
+    return opt_x, obj
+end
+```
+- Note  
+[@assert](https://docs.julialang.org/en/v1/base/base/#Base.@assert)
