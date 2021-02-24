@@ -1,5 +1,9 @@
 using LinearAlgebra, Combinatorics
 
+function is_nonnegative(x::Vector)
+    return length( x[ x .< 0] ) == 0
+end
+
 function search_BFS(c, A, b)
     m, n = size(A)
     @assert rank(A) == m
@@ -33,11 +37,6 @@ function search_BFS(c, A, b)
   
     return opt_x, obj
 end
-
-function is_nonnegative(x::Vector)
-    return length( x[ x .< 0] ) == 0
-end
-
 
 #Define the matrix and vectors
 c = [-3; -2; -1; -5; 0; 0; 0]
