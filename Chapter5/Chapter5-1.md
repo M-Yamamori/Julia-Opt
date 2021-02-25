@@ -2,6 +2,8 @@
 In this chapter, we try to search all BFS.  
 <br>
 First, I want to think about isnonnegative function.  
+<br>
+
 ```x[x.<0]``` will return the elements of vector x that is less than 0, since ```x.<0``` is an element-wise comparison with 0.  
 
 ```julia
@@ -61,7 +63,29 @@ end
 ```
 <br>
 
-Next, we want to think about search_BFS function.
+Now, we want to think about search_BFS function.  
+<br>
+
+```size(A)``` will return the tuple of the array size.
+```julia
+julia> A = [7 3 4 1 1 0 0 ;
+            2 1 1 5 0 1 0 ;
+            1 4 5 2 0 0 1 ]
+3×7 Array{Int64,2}:
+ 7  3  4  1  1  0  0
+ 2  1  1  5  0  1  0
+ 1  4  5  2  0  0  1
+
+julia> size(A)
+(3, 7)
+```
+```rank(A)``` of LinearAlgebra package can return the rank of the matrix, so ```@assert rank(A) == m``` tests the number of array of A and the rank.
+```julia
+julia> rank(A)
+3
+```
+
+
 ```julia
 function search_BFS(c, A, b)
     m, n = size(A)
