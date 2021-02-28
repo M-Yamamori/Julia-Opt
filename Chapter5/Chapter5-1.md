@@ -175,16 +175,17 @@ z = dot(c_B, x_B)
     end
 ```
 - Note  
-```dot(c_B, x_B)``` computes the inner product of ***c_B*** and ***x_B***.
+```dot(c_B, x_B)``` of LinearAlgebra computes the inner product of ***c_B*** and ***x_B***.  
+<br>
 
-
+To sum up, we can get following codes.
 
 ```julia
 function search_BFS(c, A, b)
     m, n = size(A)
     @assert rank(A) == m
 
-    opt_x = zeros(n) #n-zero vector
+    opt_x = zeros(n)
     obj = Inf
 
     for b_idx in combinations(1:n, m)
