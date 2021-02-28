@@ -1,8 +1,8 @@
 ## 5.2 Searching All Basic Feasible Solutions  
 In this chapter, we try to search all BFS.  
 <br>
+
 First, we want to think about isnonnegative function.  
-<br>
 
 ```x[x.<0]``` will return the elements of vector x that is less than 0, since ```x.<0``` is an element-wise comparison with 0.  
 
