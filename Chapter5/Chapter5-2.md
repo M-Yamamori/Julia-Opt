@@ -214,4 +214,133 @@ function search_BFS(c, A, b)
     return opt_x, obj
 end
 ```
+<br>
 
+Suppose we have following ***c***, ***A***, and ***b***.   
+```
+c = [-3; -2; -1; -5; 0; 0; 0]
+A = [7 3 4 1 1 0 0 ;
+     2 1 1 5 0 1 0 ;
+     1 4 5 2 0 0 1 ]
+b = [7; 3; 8]
+```
+Then, the result of ```search_BFS(c, A, b)``` is
+```
+Basis:[1, 2, 3]
+         x_B = [0.2500000000000001, 4.75, -2.25]
+         nonnegative? false
+Basis:[1, 2, 4]
+         x_B = [0.1724137931034483, 1.8793103448275859, 0.15517241379310343]
+         nonnegative? true
+         obj = -5.051724137931034
+Basis:[1, 2, 5]
+         x_B = [0.5714285714285714, 1.857142857142857, -2.571428571428572]  
+         nonnegative? false
+Basis:[1, 2, 6]
+         x_B = [0.16000000000000003, 1.9599999999999997, 0.7200000000000002]
+         nonnegative? true
+         obj = -4.3999999999999995
+Basis:[1, 2, 7]
+         x_B = [-1.9999999999999982, 6.999999999999998, -18.0]
+         nonnegative? false
+Basis:[1, 3, 4]
+         x_B = [0.12162162162162149, 1.4729729729729728, 0.2567567567567568]
+         nonnegative? true
+         obj = -3.121621621621621
+Basis:[1, 3, 5]
+         x_B = [0.7777777777777779, 1.4444444444444444, -4.222222222222222]
+         nonnegative? false
+Basis:[1, 3, 6]
+         x_B = [0.09677419354838701, 1.5806451612903225, 1.225806451612903]
+         nonnegative? true
+         obj = -1.8709677419354835
+Basis:[1, 3, 7]
+         x_B = [5.000000000000002, -7.0000000000000036, 38.000000000000014]
+         nonnegative? false
+Basis:[1, 4, 5]
+         x_B = [34.000000000000014, -13.000000000000005, -218.00000000000009]
+         nonnegative? false
+Basis:[1, 4, 6]
+         x_B = [0.46153846153846145, 3.769230769230769, -16.769230769230766]
+         nonnegative? false
+Basis:[1, 4, 7]
+         x_B = [0.9696969696969696, 0.2121212121212121, 6.6060606060606055]
+         nonnegative? true
+         obj = -3.9696969696969693
+Basis:[1, 5, 6]
+         x_B = [8.0, -49.0, -13.0]
+         nonnegative? false
+Basis:[1, 5, 7]
+         x_B = [1.5, -3.5, 6.5]
+         nonnegative? false
+Basis:[1, 6, 7]
+         x_B = [1.0, 1.0, 7.0]
+         nonnegative? true
+         obj = -3.0
+Basis:[2, 3, 4]
+         x_B = [-4.5, 5.0, 0.5]
+         nonnegative? false
+Basis:[2, 3, 5]
+         x_B = [7.0, -4.0, 2.0]
+         nonnegative? false
+Basis:[2, 3, 6]
+         x_B = [-3.0, 4.0, 2.0]
+         nonnegative? false
+Basis:[2, 3, 7]
+         x_B = [5.0, -2.0, -2.0]
+         nonnegative? false
+Basis:[2, 4, 5]
+         x_B = [1.888888888888889, 0.2222222222222222, 1.1111111111111107]
+         nonnegative? true
+         obj = -4.888888888888889
+Basis:[2, 4, 6]
+         x_B = [3.0, -2.0, 10.0]
+         nonnegative? false
+Basis:[2, 4, 7]
+         x_B = [2.2857142857142856, 0.14285714285714285, -1.4285714285714297]
+         nonnegative? false
+Basis:[2, 5, 6]
+         x_B = [2.0, 1.0, 1.0]
+         nonnegative? true
+         obj = -4.0
+Basis:[2, 5, 7]
+         x_B = [3.0, -2.0, -4.0]
+         nonnegative? false
+Basis:[2, 6, 7]
+         x_B = [2.333333333333333, 0.666666666666667, -1.3333333333333321]
+         nonnegative? false
+Basis:[3, 4, 5]
+         x_B = [1.4782608695652175, 0.3043478260869565, 0.7826086956521738]
+         nonnegative? true
+         obj = -3.0
+Basis:[3, 4, 6]
+         x_B = [1.9999999999999996, -1.0, 5.999999999999993]
+         nonnegative? false
+Basis:[3, 4, 7]
+         x_B = [1.6842105263157896, 0.26315789473684215, -0.9473684210526301]
+         nonnegative? false
+Basis:[3, 5, 6]
+         x_B = [1.6, 0.5999999999999996, 1.4]
+         nonnegative? true
+         obj = -1.6
+Basis:[3, 5, 7]
+         x_B = [3.0, -5.0, -7.0]
+         nonnegative? false
+Basis:[3, 6, 7]
+         x_B = [1.75, 1.25, -0.75]
+         nonnegative? false
+Basis:[4, 5, 6]
+         x_B = [4.0, 3.0, -17.0]
+         nonnegative? false
+Basis:[4, 5, 7]
+         x_B = [0.6000000000000001, 6.4, 6.8]
+         nonnegative? true
+         obj = -3.0000000000000004
+Basis:[4, 6, 7]
+         x_B = [7.0, -32.0, -6.0]
+         nonnegative? false
+Basis:[5, 6, 7]
+         x_B = [7.0, 3.0, 8.0]
+         nonnegative? true
+         obj = 0.0
+```
