@@ -1,7 +1,7 @@
 ## 5.2 Searching All Basic Feasible Solutions  
 In this chapter, we try to search all BFS.  
 <br>
-First, I want to think about isnonnegative function.  
+First, we want to think about isnonnegative function.  
 <br>
 
 ```x[x.<0]``` will return the elements of vector x that is less than 0, since ```x.<0``` is an element-wise comparison with 0.  
@@ -107,9 +107,9 @@ julia> collect( combinations(1:7, 3) )
  [4, 6, 7]
  [5, 6, 7]
 ```
-```combinations(1:n, m)``` generates an Iterator object, and for which we can get the value by using ```collect``` function. Each above combination represents indices of columns in A.
+```combinations(1:n, m)``` generates an iterator object, and for which we can get the value by using ```collect``` function. Each above combination represents indices of columns in A.
 - Note  
-[collect function](https://docs.julialang.org/en/v1/base/collections/#Base.collect-Tuple{Any})
+[collect function](https://docs.julialang.org/en/v1/base/collections/#Base.collect-Tuple{Any}) returns an array of all items in the iterator.
 
 Then, we construct a for-loop to get basis matrix for each index, b_idx.
 ```julia
@@ -124,6 +124,59 @@ B = A[:, b_idx]
 c_B = c[b_idx]
 x_B = inv(B) * b
 ```
+
+```julia
+julia> A = [7 3 4 1 1 0 0 ;
+           2 1 1 5 0 1 0 ;
+           1 4 5 2 0 0 1 ]
+3×7 Array{Int64,2}:
+ 7  3  4  1  1  0  0
+ 2  1  1  5  0  1  0
+ 1  4  5  2  0  0  1
+
+julia> b_idx = [2,5,6]
+3-element Array{Int64,1}:
+ 2
+ 5
+ 6
+
+julia> A[:, b_idx]
+3×3 Array{Int64,2}:
+ 3  1  0
+ 1  0  1
+ 4  0  0
+
+julia> c = [-3; -2; -1; -5; 0; 0; 0]
+7-element Array{Int64,1}:
+ -3
+ -2
+ -1
+ -5
+  0
+  0
+  0
+
+julia> c[b_idx]
+3-element Array{Int64,1}:
+ -2
+  0
+  0
+```
+
+Now, we need to see if the current basis implies a feasible solution. It means we need to check current ***x_B*** is nonnegative. We can use isnonnegative function here.
+
+If we can see ***x_B*** is nonnegative, then we compare its objective function value with the smallest objective function value that is stored in obj.
+```julia
+z = dot(c_B, x_B)
+    if z < obj
+        obj = z
+        opt_x = zeros(n)
+        opt_x[b_idx] = x_B
+    end
+```
+- Note  
+```dot(c_B, x_B)``` computes the inner product of ***c_B*** and ***x_B***.
+
 
 
 ```julia
