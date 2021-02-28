@@ -64,7 +64,6 @@ end
 <br>
 
 Now, we want to think about search_BFS function.  
-<br>
 
 ```size(A)``` will return the tuple of the array size.
 ```julia
