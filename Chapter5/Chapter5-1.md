@@ -79,10 +79,50 @@ julia> A = [7 3 4 1 1 0 0 ;
 julia> size(A)
 (3, 7)
 ```
+
 ```rank(A)``` of LinearAlgebra package can return the rank of the matrix, so ```@assert rank(A) == m``` tests the number of array of A and the rank.
 ```julia
 julia> rank(A)
 3
+```
+- Note  
+[@assert](https://docs.julialang.org/en/v1/base/base/#Base.@assert)
+
+To examine all combinations of the basis, we use Combinatorics package. This is an example of when we have n = 7 and m = 3.
+```julia
+julia> combinations(1:7, 3)
+Base.Generator{Combinatorics.Combinations,Combinatorics.var"#reorder#10"{UnitRange{Int64}}}(Combinatorics.var"#reorder#10"{UnitRange{Int64}}(1:7), Combinatorics.Combinations(7, 3))
+
+julia> collect( combinations(1:7, 3) )
+35-element Array{Array{Int64,1},1}:
+ [1, 2, 3]
+ [1, 2, 4]
+ [1, 2, 5]
+ [1, 2, 6]
+ [1, 2, 7]
+ ⋮
+ [3, 6, 7]
+ [4, 5, 6]
+ [4, 5, 7]
+ [4, 6, 7]
+ [5, 6, 7]
+```
+```combinations(1:n, m)``` generates an Iterator object, and for which we can get the value by using ```collect``` function. Each above combination represents indices of columns in A.
+- Note  
+[collect function](https://docs.julialang.org/en/v1/base/collections/#Base.collect-Tuple{Any})
+
+Then, we construct a for-loop to get basis matrix for each index, b_idx.
+```julia
+for b_idx in combinations(1:n, m)
+  #Check whether the combination is BFS or not.
+end
+```
+
+At this time, we can represent matrix ***B***, vector ***c_B*** and ***x_B*** as follows.
+```
+B = A[:, b_idx]
+c_B = c[b_idx]
+x_B = inv(B) * b
 ```
 
 
@@ -121,5 +161,4 @@ function search_BFS(c, A, b)
     return opt_x, obj
 end
 ```
-- Note  
-[@assert](https://docs.julialang.org/en/v1/base/base/#Base.@assert)
+
