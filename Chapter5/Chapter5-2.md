@@ -123,6 +123,8 @@ B = A[:, b_idx]
 c_B = c[b_idx]
 x_B = inv(B) * b
 ```
+- Note  
+inv(B) is from LinearAlgebra package.
 
 ```julia
 julia> A = [7 3 4 1 1 0 0 ;
@@ -133,7 +135,7 @@ julia> A = [7 3 4 1 1 0 0 ;
  2  1  1  5  0  1  0
  1  4  5  2  0  0  1
 
-julia> b_idx = [2,5,6]
+julia> b_idx = [2, 5, 6]
 3-element Array{Int64,1}:
  2
  5
