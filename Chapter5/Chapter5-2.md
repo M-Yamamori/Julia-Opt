@@ -78,7 +78,7 @@ julia> size(A)
 (3, 7)
 ```
 
-```rank(A)``` of LinearAlgebra package can return the rank of the matrix, so ```@assert rank(A) == m``` tests the number of array of A and the rank.
+```rank(A)``` of LinearAlgebra package can return the rank of the matrix, so after ```m, n = size(A)```, ```@assert rank(A) == m``` tests the number of array of A and the rank.
 ```julia
 julia> rank(A)
 3
