@@ -25,8 +25,7 @@ julia> x[x.<0]
  -2
 ```
 - Note  
-About [BitArray](https://docs.julialang.org/en/v1/base/arrays/#Base.BitArray-Tuple{UndefInitializer,Vararg{Integer,N}%20where%20N}
-)
+[BitArray](https://docs.julialang.org/en/v1/base/arrays/#Base.BitArray)
 
 ```length(x[x.<0])``` will return the number of the negative elements. 
 ```julia
