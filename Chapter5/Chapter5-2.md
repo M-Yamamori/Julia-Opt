@@ -85,6 +85,28 @@ julia> rank(A)
 ```
 - Note  
 [@assert](https://docs.julialang.org/en/v1/base/base/#Base.@assert)
+```julia
+julia> m = 3
+3
+
+julia> n = 2
+2
+
+julia> @assert m == n
+ERROR: AssertionError: m == n
+Stacktrace:
+ [1] top-level scope at REPL[3]:1
+
+julia> @assert m == n "m not equals to n"
+ERROR: AssertionError: m not equals to n
+Stacktrace:
+ [1] top-level scope at REPL[8]:1
+
+julia> n = 3
+3
+
+julia> @assert m == n
+```
 
 To examine all combinations of the basis, we use Combinatorics package. This is an example of when we have n = 7 and m = 3.
 ```julia
