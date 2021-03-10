@@ -185,7 +185,7 @@ julia> c[b_idx]
   0
 ```
 
-Now, we need to see if the current basis implies a feasible solution. It means we need to check current ***x_B*** is nonnegative. We can use isnonnegative function here.
+Now, we need to see if the current basis can lead to a feasible solution. It means we need to check current ***x_B*** is nonnegative. We can use isnonnegative function here.
 
 If we can see ***x_B*** is nonnegative, then we compare its objective function value with the smallest objective function value that is stored in obj.
 ```julia
