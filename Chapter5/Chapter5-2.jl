@@ -45,4 +45,4 @@ A = [7 3 4 1 1 0 0 ;
      1 4 5 2 0 0 1 ]
 b = [7; 3; 8]
 
-search_BFS(c, A, b)
+println(search_BFS(c, A, b))
