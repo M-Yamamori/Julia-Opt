@@ -11,4 +11,4 @@ b = Array{Float64}(b)
 include("simplex_method.jl")
 using Main.SimplexMethod
 
-simplex_method(c, A, b)
+SimplexMethod.simplex_method(c, A, b)
