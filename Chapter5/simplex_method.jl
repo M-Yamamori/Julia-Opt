@@ -2,6 +2,8 @@ module SimplexMethod
 
   using LinearAlgebra, Combinatorics, Printf
 
+  export simplex_method
+
   mutable struct SimplexTableau
     z_c     ::Array{Float64}
     Y       ::Array{Float64}
