@@ -9,7 +9,7 @@ mutable struct SimplexTableau
 end
 
 function is_nonnegative(x::Vector)
-  return length( x[ x .< 0] ) == 0
+  return length(x[ x .< 0]) == 0
 end
 
 function initialize(c, A, b)
@@ -81,7 +81,7 @@ function is_optimal(t::SimplexTableau)
 end
 
 function is_nonpositive(z::Array)
-     return length( z[ z .> 0] ) == 0
+     return length(z[ z .> 0]) == 0
 end
 
 function pivoting!(t::SimplexTableau)
@@ -104,7 +104,7 @@ function pivoting!(t::SimplexTableau)
   t.z_c -= coef * t.Y[exiting, :]'
   t.obj -= coef * t.x_B[exiting]
 
-  t.b_idx[ findfirst(t.b_idx .== t.b_idx[exiting]) ] = entering
+  t.b_idx[findfirst(t.b_idx .== t.b_idx[exiting])] = entering
 end
 
 function pivot_point(t::SimplexTableau)
@@ -113,11 +113,11 @@ function pivot_point(t::SimplexTableau)
     error("Optimal")
   end
 
-  pos_idx = findall( t.Y[:, entering] .> 0 )
+  pos_idx = findall(t.Y[:, entering] .> 0)
   if length(pos_idx) == 0
     error("Unbounded")
   end
-  exiting = pos_idx[ argmin( t.x_B[pos_idx] ./ t.Y[pos_idx, entering] ) ]
+  exiting = pos_idx[argmin(t.x_B[pos_idx] ./ t.Y[pos_idx, entering])]
 
   return entering, exiting
 end
