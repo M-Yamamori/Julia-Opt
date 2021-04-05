@@ -1,1 +1,3 @@
 - [Julia Programming for Operations Research Chapter5](https://www.softcover.io/read/7b8eb7d0/juliabook/simplex)  
+- https://github.com/chkwon/jpor_codes/tree/master/chap5
+- 
