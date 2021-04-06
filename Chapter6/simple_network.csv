@@ -1,4 +1,4 @@
-start node i,end node j,c_ij,u_ij
+﻿start node i,end node j,c_ij,u_ij
 1,2,2,Inf
 1,3,5,Inf
 2,3,3,Inf
