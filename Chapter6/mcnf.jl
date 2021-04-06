@@ -1,5 +1,7 @@
 module MCNF
 
+using JuMP, GLPK
+
 export minimal_cost_network_flow
 
   function minimal_cost_network_flow(nodes, links, c_dict, u_dict, b)
