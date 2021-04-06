@@ -12,8 +12,7 @@ export minimal_cost_network_flow
     @objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))
 
     for i in nodes
-      @constraint(mcnf, sum(x[(ii,j)] for (ii,j) in links if ii==i)
-                      - sum(x[(j,ii)] for (j,ii) in links if ii==i) == b[i])
+      @constraint(mcnf, sum(x[(ii,j)] for (ii,j) in links if ii==i) - sum(x[(j,ii)] for (j,ii) in links if ii==i) == b[i])
     end
 
     JuMP.optimize!(mcnf)
