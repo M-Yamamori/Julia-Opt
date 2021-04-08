@@ -8,7 +8,6 @@ export minimal_cost_network_flow
     mcnf = Model(GLPK.Optimizer)
 
     @variable(mcnf, 0<= x[link in links] <= u_dict[link])
-
     @objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))
 
     for i in nodes
