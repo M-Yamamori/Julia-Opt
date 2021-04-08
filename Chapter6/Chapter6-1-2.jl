@@ -11,7 +11,7 @@ u = network_data[:, 4]
 
 b = network_data2[:, 2]
 
-#Assignments of number of nodes and number of links
+#Count the number of nodes and number of links
 no_node = max(maximum(start_node), maximum(end_node))
 no_link = length(start_node)
 
@@ -24,7 +24,7 @@ u_dict = Dict(links .=> u)
 #Prepare an optimization model
 mcnf = Model(GLPK.Optimizer)
 
-#Define decision the variables and the objective
+#Define the decision variables and the objective
 @variable(mcnf, 0<= x[link in links] <= u_dict[link])
 @objective(mcnf, Min, sum( c_dict[link] * x[link] for link in links))
 
