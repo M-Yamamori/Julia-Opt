@@ -26,11 +26,11 @@ mcnf = Model(GLPK.Optimizer)
 
 #Define the decision variables and the objective
 @variable(mcnf, 0<= x[link in links] <= u_dict[link])
-@objective(mcnf, Min, sum( c_dict[link] * x[link] for link in links))
+@objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))
 
-#Add the information of flow into the constraints
+#Add the constraints of flow
 for i in nodes
-  @constraint(mcnf, sum(x[(ii,j)] for (ii,j) in links if ii==i) - sum(x[(j,ii)] for (j,ii) in links if ii==i) == b[i])
+  @constraint(mcnf, sum(x[(ii,j)] for (ii,j) in links if ii == i) - sum(x[(j,ii)] for (j,ii) in links if ii == i) == b[i])
 end
 
 #Solve
