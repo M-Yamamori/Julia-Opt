@@ -11,7 +11,7 @@ u = network_data[:, 4]
 
 b = network_data2[:, 2]
 
-#Assignments of number of nodes and number of links
+#Count the number of nodes and number of links
 no_node = max(maximum(start_node), maximum(end_node))
 no_link = length(start_node)
 
