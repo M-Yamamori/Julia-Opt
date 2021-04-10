@@ -60,7 +60,7 @@ Then we want to create array objects of the set of nodes N and links A.
 nodes = 1:no_node
 links = Tuple((start_node[i], end_node[i]) for i in 1:no_link)
 ```
-```Tuple``` returns tuple. ##################
+```Tuple``` returns tuple.  
 
 ```
 julia> links
