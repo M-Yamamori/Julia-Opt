@@ -106,8 +106,6 @@ from Buffalo to Erie: 10.0
 <br>
 
 - Note  
-   - What is in the JuMP package.  
-   - How to deal with the data file with String and Int generally.
-
-
-https://dataframes.juliadata.org/v0.18/lib/types.html
+   - What is in the JuMP package, and how do they solve it specifically.  
+   - How to deal with the data file with String and Int generally.  
+   - More details about [DataFrames](https://dataframes.juliadata.org/v0.18/lib/types.html)  
