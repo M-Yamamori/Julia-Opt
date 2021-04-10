@@ -92,17 +92,17 @@ end
 In this function, we just search for a possible combination of basis until we find a BFS. [error](https://docs.julialang.org/en/v1/base/base/#Base.error) will give the message, when an ErrorException rises.  
 
 - Note  
-```-1``` in ```for i in length(comb):-1:1``` means count down.
-```julia
-julia> for i in 5:-1:1
-           println(i)
-       end
-5
-4
-3
-2
-1
-```
+  ```-1``` in ```for i in length(comb):-1:1``` means count down.
+  ```julia
+  julia> for i in 5:-1:1
+             println(i)
+         end
+  5
+  4
+  3
+  2
+  1
+  ```
 
 ```isnonnegative``` function is same as Chapter5.2.  
 ```julia
@@ -203,7 +203,8 @@ Considering mini ratio test, we first find rows with yik > 0.
 pos_idx = findall(t.Y[:, entering] .> 0)
 ```
 [findall](https://docs.julialang.org/en/v1/base/arrays/#Base.findall-Tuple{Any}) will return a array that satisfies the condition in the bracket. If there are no element of A, it will return an empty array.  
-- ```entering = findfirst(t.z_c .> 0)[2]```  <-- 2nd element is better?
+- Note  
+  ```entering = findfirst(t.z_c .> 0)[2]```  <-- 2nd element is better?  
 <br>
 
 When all elements of t.Y are nonnegative, the problem is unbounded.  
@@ -358,5 +359,5 @@ x[ 2] |  0.00   1.00   1.28   0.00  -0.01  -0.11   0.28 |   1.88
 
 
 - Note  
-[Printf](https://github.com/JuliaLang/julia/blob/master/stdlib/Printf/src/Printf.jl)
+  [Printf](https://github.com/JuliaLang/julia/blob/master/stdlib/Printf/src/Printf.jl)
 
