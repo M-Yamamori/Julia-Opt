@@ -136,12 +136,17 @@ end
 ```
 where ii is a dummy index for i. The Julia code is almost a direct translation of the original mathematical expression.
 - Note  
-  Dummy index
+  Dummy index  
+  [More details of ```@constraint```](https://jump.dev/JuMP.jl/v0.21.1/constraints/#The-@constraint-macro-1)  
+<br>
 
-
-
-https://jump.dev/JuMP.jl/v0.21.1/constraints/#The-@constraint-macro-1
-
+Then, what we have to do is to solve the problem by using JuMP.  
+```julia
+JuMP.optimize!(mcnf)
+obj = JuMP.objective_value(mcnf)
+x_star = JuMP.value.(x)
+```
+<br>
 
 
 The result of Chapter6-1-1.jl
