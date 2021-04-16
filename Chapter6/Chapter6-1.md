@@ -36,7 +36,10 @@ We can read CSV files by using ```CSV.read("path", DataFrame)```. You may need t
    4 │      4     -2
    5 │      5     -3
 ```
-Then we assign each vectors.  
+In [DataFrame package](https://dataframes.juliadata.org/stable/), there are tools for working with tabular data.   
+<br>
+
+Then we assign each vectors by the data.  
 ```julia
 start_node = network_data[:, 1]
 end_node = network_data[:, 2]
@@ -61,6 +64,7 @@ nodes = 1:no_node
 links = Tuple((start_node[i], end_node[i]) for i in 1:no_link)
 ```
 ```Tuple``` returns tuple.  
+- Note  
 
 ```
 julia> links
