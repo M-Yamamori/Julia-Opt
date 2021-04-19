@@ -1,59 +1,40 @@
+## 6.2  
+
 First, we read the CSV file.  
 ```julia
-using CSV, DataFrames
-data1 = CSV.read("transportation_1.csv", DataFrame; header = 0)
-data2 = CSV.read("transportation_2.csv", DataFrame; header = 0)
+using DelimitedFiles
+
+data = readdlm("transportation.csv", ',')
 ```
 ```julia
-julia> data1
-2×3 DataFrame
- Row │ Column1  Column2  Column3 
-     │ Int64    Int64    Int64   
-─────┼───────────────────────────
-   1 │      10        7        9
-   2 │       4        9        8
-
-julia> data2
-5×2 DataFrame
- Row │ Column1  Column2 
-     │ String   Int64   
-─────┼──────────────────
-   1 │ Austin        15
-   2 │ Buffalo       25
-   3 │ Chicago       15
-   4 │ Denver        12
-   5 │ Erie          13
+julia> data
+4×5 Matrix{Any}:
+   ""  ""         15           12          13
+   ""  ""           "Chicago"    "Denver"    "Erie"
+ 15    "Austin"   10            7           9
+ 25    "Buffalo"   4            9           8
 ```
+[DelimitFiles package](https://docs.julialang.org/en/v1/stdlib/DelimitedFiles/) allows us to read the CSV file type Any matrix.  
 
-Then, we want to arrange the data from DataFrame to array except for c.  
+Then, we want to arrange the data from Any matrix to Array except for c.  
 ```julia
-s_node_name = data2[1:2, 1]
-s = data2[1:2, 2]
+s_node_name = data[3:4, 2]
+s = data[3:4, 1]
 
-d_node_name = data2[3:5, 1]
-d = data2[3:5, 2]
+d_node_name = data[2, 3:5]
+d = data[1, 3:5]
 
-c = data1[:, :]
+c = data[3:4, 3:5]
 ```
-- Note  
-   If you take a row from the DataFrame, it will not be an array object but ```DataFrameRow```.
-   ```julia
-   julia> d = data1[1, 2:4]
-   DataFrameRow
-    Row │ Column2  Column3  Column4 
-        │ Int64    Int64    Int64   
-   ─────┼───────────────────────────
-      1 │      15       12       13
-   ```
 <br>
 
-We create the dictionaries by using JuMP package.  
+We create the dictionaries  
 ```julia
 s_dict = Dict(s_node_name .=> s)
 d_dict = Dict(d_node_name .=> d)
 c_dict = Dict((s_node_name[i], d_node_name[j]) => c[i,j] for i in 1:length(s_node_name), j in 1:length(d_node_name))
 ```
-We also prepare the optimizer model and variables, objective, and constraints by using JuMP and GLPK.  
+We also prepare the optimizer model, variables, objective, and constraints by using JuMP and GLPK.  
 ```julia
 tp = Model(GLPK.Optimizer)
 
@@ -106,6 +87,4 @@ from Buffalo to Erie: 10.0
 <br>
 
 - Note  
-   - What is in the JuMP package, and how do they solve it specifically.  
-   - How to deal with the data file with String and Int generally.  
-   - More details about [DataFrames](https://dataframes.juliadata.org/v0.18/lib/types.html)  
+   - What is in the JuMP package.  
