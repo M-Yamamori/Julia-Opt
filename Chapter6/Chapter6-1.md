@@ -63,6 +63,11 @@ nodes = 1:no_node
 links = Tuple((start_node[i], end_node[i]) for i in 1:no_link)
 ```
 ```Tuple``` returns tuple.  
+<<<<<<< HEAD
+=======
+- Note  
+
+>>>>>>> bf011de37aef340e089d977bb9af777d4659e259
 ```
 julia> links
 8-element Array{Tuple{Int64,Int64},1}:
