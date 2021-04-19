@@ -6,7 +6,6 @@ In this chapter, we will find some common network optimization problems and lear
 First, we read and arrange the CSV file with the data of nodes,"simple_network.csv" and "simple_network_2.csv". We use CSV package and DataFrames package.  
 ```julia
 using CSV, DataFrames
-
 network_data = CSV.read("simple_network.csv", DataFrame)
 network_data2 = CSV.read("simple_network_2.csv", DataFrame)
 ```
@@ -36,13 +35,15 @@ We can read CSV files by using ```CSV.read("path", DataFrame)```. You may need t
    4 │      4     -2
    5 │      5     -3
 ```
-Then we assign each vectors.  
+In [DataFrame package](https://dataframes.juliadata.org/stable/), there are tools for working with tabular data.   
+<br>
+
+Then we assign each vectors by the data.  
 ```julia
 start_node = network_data[:, 1]
 end_node = network_data[:, 2]
 c = network_data[:, 3]
 u = network_data[:, 4]
-
 b = network_data2[:, 2]
 ```
 <br>
@@ -52,7 +53,8 @@ We want to know the number of nodes and links(edges). When the numbering starts 
 no_node = max(maximum(start_node), maximum(end_node))
 no_link = length(start_node)
 ```
-Note that ```max``` is used to compare two different numbers and ```maximum``` is used to identify the biggest number among all elements in a vector.  
+- Note  
+  ```max``` is used to compare two different numbers and ```maximum``` is used to identify the biggest number among all elements in a vector.  
 <br>
 
 Then we want to create array objects of the set of nodes N and links A.  
@@ -61,7 +63,6 @@ nodes = 1:no_node
 links = Tuple((start_node[i], end_node[i]) for i in 1:no_link)
 ```
 ```Tuple``` returns tuple.  
-
 ```
 julia> links
 8-element Array{Tuple{Int64,Int64},1}:
@@ -74,6 +75,12 @@ julia> links
  (4,5)
  (5,2)
 ```
+
+- Note  
+  - Array  
+    An array is an ordered collection of elements. We can create arrays that is full or empty and that had different types value or specific type value. ***Arrays are mutable***.  
+  - Tuple  
+    A tuple is an ordered sequence of elements. In julia Tuple is better to use for small fixed-length collections. ***Tuples are immutable.***  
 <br>
 
 We use this ```links``` array to make a model of the minimal-cost network-flow problem. We prepare dictionaries of c and u.  
@@ -81,7 +88,10 @@ We use this ```links``` array to make a model of the minimal-cost network-flow p
 c_dict = Dict(links .=> c)
 u_dict = Dict(links .=> u)
 ```
-[Dict](https://docs.julialang.org/en/v1/base/collections/#Base.Dict) will make a dictionary.  
+[Dict](https://docs.julialang.org/en/v1/base/collections/#Base.Dict) will make a hash table.  
+- Note  
+  Hash table is a data structure that implements an associative array with abstract data type.  
+
 ```julia
 julia> c_dict
 Dict{Tuple{Int64,Int64},Int64} with 8 entries:
@@ -93,7 +103,6 @@ Dict{Tuple{Int64,Int64},Int64} with 8 entries:
   (4, 1) => 0
   (1, 3) => 5
   (3, 4) => 1
-
 julia> u_dict
 Dict{Tuple{Int64,Int64},Float64} with 8 entries:
   (3, 5) => 1.0
@@ -115,17 +124,23 @@ First, we create an optimization model.
 ```julia
 mcnf = Model(GLPK.Optimizer)
 ```
-[Model](https://jump.dev/JuMP.jl/v0.21.1/solvers/#JuMP.Model-Tuple{Any}) is a part of JuMP package. 
-It return a new JuMP model with the provided optimizer. ```GLPK.Optimizer``` can create a new optimizer object. 
+This [Model](https://jump.dev/JuMP.jl/v0.21.1/solvers/#JuMP.Model-Tuple{Any}) is a part of JuMP package. It return a new JuMP model with the provided optimizer. ```GLPK.Optimizer``` can create a new optimizer object.  
+```julia
+julia> mcnf
+A JuMP Model
+Feasibility problem with:
+Variables: 0
+Model mode: AUTOMATIC
+CachingOptimizer state: EMPTY_OPTIMIZER
+Solver name: GLPK
+```
 
-Then, we define the decision variables and the objective.  
+There are still no variables and an objective,so we define and add the decision variables and the objective.  
 ```julia
 @variable(mcnf, 0 <= x[link in links] <= u_dict[link])
 @objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))
 ```
-
-[JuMP variables](https://jump.dev/JuMP.jl/v0.21.1/variables/#Variables-1) can have names or start value. There is also an [extension](https://jump.dev/JuMP.jl/v0.21.1/variables/#Variable-bounds-1) to add lower and upper bounds to each optimization variable. In the code above, we added both lower and upper bounds.  
-We can set the objective by ```@objective(model::Model, sense, func)```. [More details](https://jump.dev/JuMP.jl/v0.21.1/objective/#JuMP.@objective).  
+[JuMP variables](https://jump.dev/JuMP.jl/v0.21.1/variables/#Variables-1) can have an [extension to add lower and upper bounds](https://jump.dev/JuMP.jl/v0.21.1/variables/#Variable-bounds-1) to each optimization variable. We can set the objective by ```@objective(model::Model, sense, func)```.  
 <br>
 
 Now, we move on to an important point, we add the flow conservation constraints.
@@ -134,10 +149,10 @@ for i in nodes
   @constraint(mcnf, sum(x[(ii,j)] for (ii,j) in links if ii == i) - sum(x[(j,ii)] for (j,ii) in links if ii == i) == b[i])
 end
 ```
-where ii is a dummy index for i. The Julia code is almost a direct translation of the original mathematical expression.
+where ii is a dummy index for i. We can set the constraints by ```@constraint```, and arguments are model and constraints.  
 - Note  
-  Dummy index  
-  [More details of ```@constraint```](https://jump.dev/JuMP.jl/v0.21.1/constraints/#The-@constraint-macro-1)  
+   - Dummy index means summation. -> Commonly used in programming? 
+   - [More details of ```@constraint```](https://jump.dev/JuMP.jl/v0.21.1/constraints/#The-@constraint-macro-1)  
 <br>
 
 Then, what we have to do is to solve the problem by using JuMP.  
@@ -146,6 +161,9 @@ JuMP.optimize!(mcnf)
 obj = JuMP.objective_value(mcnf)
 x_star = JuMP.value.(x)
 ```
+```JuMP.optimize!(Model::model)``` is a function to solve the given model. We can see the optimization result by ```JuMP.objective_value(mcnf)```. The primal solution can be obtained by calling ```JuMP.value.```. For the dual solution, the function is ```JuMP.dual.```.  
+- Note  
+  optimize! has !, so the mcnf is updated.  
 <br>
 
 
@@ -182,7 +200,6 @@ Subject to
  x[(4, 1)] <= Inf
  x[(4, 5)] <= Inf
  x[(5, 2)] <= Inf
-
 The optimal objective function value is = 45.0
 x_star is [0.0, 0.0, 10.0, 9.0, 1.0, 5.0, 2.0, 0.0]
 ```
