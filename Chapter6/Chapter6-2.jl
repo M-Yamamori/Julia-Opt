@@ -1,17 +1,16 @@
-using CSV, DataFrames, JuMP, GLPK
+using DelimitedFiles, JuMP, GLPK
 
 #Read the CSV file
-data1 = CSV.read("transportation_1.csv", DataFrame; header = 0)
-data2 = CSV.read("transportation_2.csv", DataFrame; header = 0)
+data = readdlm("transportation.csv", ',')
 
 #Arrange the data
-s_node_name = data2[1:2, 1]
-s = data2[1:2, 2]
+s_node_name = data[3:4, 2]
+s = data[3:4, 1]
 
-d_node_name = data2[3:5, 1]
-d = data2[3:5, 2]
+d_node_name = data[2, 3:5]
+d = data[1, 3:5]
 
-c = data1[:, :]
+c = data[3:4, 3:5]
 
 #Creat the dictionary by JuMP
 s_dict = Dict(s_node_name .=> s)
