@@ -1,4 +1,4 @@
-## 6.2  
+## 6.2 The Transportation Problem  
 
 First, we read the CSV file.  
 ```julia
