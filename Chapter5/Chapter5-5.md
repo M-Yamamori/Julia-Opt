@@ -190,10 +190,10 @@ end
 The exclamation mark implies that the function changes the content of the argument. Pivoting will change the values in the current tableau by row operations. We first determine the entering and exiting variable using the pivot_point function.  
 ```julia
 function pivot_point(t::SimplexTableau)
-  # Find the entering variable index
+  #Find the entering variable index
   entering = ...
 
-  # Do min ratio test and find the exiting variable index
+  #Do min ratio test and find the exiting variable index
   exiting = ...
 
   return entering, exiting
@@ -203,7 +203,7 @@ end
 
 Finding the entering variable is easily done by searching zj − cj > 0.  
 ```julia
-entering = findfirst(t.z_c .>0)
+entering = findfirst(t.z_c .> 0)
 ```
 ```findfirst``` returns the first element of the array which satisfies the condition shown in the bracket, so here, we select the smallest index with zj − cj > 0.  
 <br>
