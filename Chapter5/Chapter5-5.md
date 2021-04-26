@@ -206,6 +206,8 @@ Finding the entering variable is easily done by searching zj − cj > 0.
 entering = findfirst(t.z_c .> 0)
 ```
 ```findfirst``` returns the first element of the array which satisfies the condition shown in the bracket, so here, we select the smallest index with zj − cj > 0.  
+- Note  
+  ```entering = findfirst(t.z_c .> 0)[2]```  <-- 2nd element is better?  
 <br>
 
 Considering mini ratio test, we first find rows with yik > 0.  
@@ -213,8 +215,6 @@ Considering mini ratio test, we first find rows with yik > 0.
 pos_idx = findall(t.Y[:, entering] .> 0)
 ```
 [findall](https://docs.julialang.org/en/v1/base/arrays/#Base.findall-Tuple{Any}) will return a array that satisfies the condition in the bracket. If there are no element of A, it will return an empty array.  
-- Note  
-  ```entering = findfirst(t.z_c .> 0)[2]```  <-- 2nd element is better?  
 <br>
 
 When all elements of t.Y are nonnegative, the problem is unbounded.  
