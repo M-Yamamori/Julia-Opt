@@ -42,7 +42,7 @@ tableau = SimplexTableau(z_c, Y, x_B, obj, b_idx)
 julia> typeof(tableau)
 SimplexTableau
 ```
-We also can get each variable 
+We also can get each variable.  
 ```
 julia> tableau.b_idx
 3-element Array{Int64,1}:
