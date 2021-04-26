@@ -1,7 +1,7 @@
 ## 5.5 Implementing the Simplex Method  
 In this section, we implement the Simplex Method. We will try to mimic the pivoting in tableau form.  
 
-In outline, 
+In outline,  
 1)we start from deciding a initial BFS,  
 2)then make the tableau from the BFS.  
 3)While the tableau shows the optimal solution, we repeat pivoting and renew the tableau.  
