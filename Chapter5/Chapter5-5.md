@@ -17,6 +17,11 @@ mutable struct SimplexTableau
 end
 ```
 
+- Note  
+  Member variables are variables in the class, which explain the object attribute.  
+<br>
+
+We can see the fieldname and type by using ```fieldnames``` and ```typeof```.  
 ```julia
 julia> fieldnames(SimplexTableau)
 (:z_c, :Y, :x_B, :obj, :b_idx)
@@ -36,7 +41,9 @@ tableau = SimplexTableau(z_c, Y, x_B, obj, b_idx)
 ```julia
 julia> typeof(tableau)
 SimplexTableau
-
+```
+We also can get each variable 
+```
 julia> tableau.b_idx
 3-element Array{Int64,1}:
  5
