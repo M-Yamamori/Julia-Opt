@@ -214,7 +214,7 @@ Considering mini ratio test, we first find rows with yik > 0.
 ```julia
 pos_idx = findall(t.Y[:, entering] .> 0)
 ```
-[findall](https://docs.julialang.org/en/v1/base/arrays/#Base.findall-Tuple{Any}) will return a array that satisfies the condition in the bracket. If there are no element of A, it will return an empty array.  
+[findall](https://docs.julialang.org/en/v1/base/arrays/#Base.findall-Tuple{Any}) will return an array of index that satisfies the condition in the bracket. If there are no element of A, it will return an empty array.  
 <br>
 
 When all elements of t.Y are nonnegative, the problem is unbounded.  
