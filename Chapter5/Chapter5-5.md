@@ -203,11 +203,43 @@ end
 
 Finding the entering variable is easily done by searching zj − cj > 0.  
 ```julia
-entering = findfirst(t.z_c .> 0)
+entering = findfirst(t.z_c .> 0)[2]
 ```
-```findfirst``` returns the first element of the array which satisfies the condition shown in the bracket, so here, we select the smallest index with zj − cj > 0.  
-- Note  
-  ```entering = findfirst(t.z_c .> 0)[2]```  <-- 2nd element is better?  
+```findfirst``` returns the first element of the array which satisfies the condition shown in the bracket.  
+- When the argument in the bracket is a vector, it will return int.  
+  ```julia
+  julia> a = [1; 2; 3; 4]
+  4-element Vector{Int64}:
+  1
+  2
+  3
+  4
+
+  julia> findfirst(a .> 3)
+  4
+  ```
+- When the argument is a matrix, it will return ***CartesianIndex***.  
+  ```julia
+  julia> a = [1 2 3 4]
+  1×4 Matrix{Int64}:
+  1  2  3  4
+
+  julia> findfirst(a .> 3)
+  CartesianIndex(1, 4)
+  ```
+
+Now, ```t.z_c``` is 1×7 Matrix, so ```findfirst``` will return ```CartesianIndex```. To get first index of the condition, we need to specify [2].  
+```julia
+julia> t.z_c
+1×7 Matrix{Float64}:
+ 3.0  2.0  1.0  5.0  0.0  0.0  0.0
+
+julia> entering = findfirst(t.z_c .> 0)
+CartesianIndex(1, 1)
+
+julia> entering = findfirst(t.z_c .> 0)[2]
+1
+```
 <br>
 
 Considering mini ratio test, we first find rows with yik > 0.  
