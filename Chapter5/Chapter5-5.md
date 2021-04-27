@@ -132,13 +132,65 @@ z_c = zeros(1,n)
 n_idx = setdiff(1:n, b_idx)
 z_c[n_idx] = c_B' * inv(B) * A[:, n_idx] - c[n_idx]'
 ```
-In the above code, ```b_idx``` represents the current set of indices for basic variables, and ```n_idx``` represents the set of indices for non-basic variables. [setdiff](https://docs.julialang.org/en/v1/base/collections/#Base.setdiff) function will construct the set of elements in the array of the first argument but not in the array of second argument.  
-```julia
-julia> setdiff([1,2,3,4], [0,2,4,6])
-2-element Vector{Int64}:
- 1
- 3
-```
+In the above code, ```b_idx``` represents the current set of indices for basic variables, and ```n_idx``` represents the set of indices for non-basic variables.  
+[setdiff](https://docs.julialang.org/en/v1/base/collections/#Base.setdiff) function will construct the set or vector of elements in the array of the first argument but not in the array of second argument.  
+- When the arguments are vectors, it will return  a vector.  
+  ```julia
+  julia> a = [1; 2; 3; 4]
+  4-element Vector{Int64}:
+  1
+  2
+  3
+  4
+
+  julia> b = [0; 2; 4; 6]
+  4-element Vector{Int64}:
+  0
+  2
+  4
+  6
+
+  julia> setdiff(a, b)
+  2-element Vector{Int64}:
+  1
+  3
+  ```
+- When the arguments are matrices, it will return a vector, too.  
+  ```julia
+  julia> c = [1 2 3 4]
+  1×4 Matrix{Int64}:
+  1  2  3  4
+
+  julia> d = [0 2 4 6]
+  1×4 Matrix{Int64}:
+  0  2  4  6
+
+  julia> setdiff(c, d)
+  2-element Vector{Int64}:
+  1
+  3
+  ```
+- When they are sets, it will return a set.
+  ```julia
+  julia> e = Set([1 2 3 4])
+  Set{Int64} with 4 elements:
+    4
+    2
+    3
+    1
+
+  julia> f = Set([0 2 4 6])
+  Set{Int64} with 4 elements:
+    0
+    4
+    6
+    2
+
+  julia> setdiff(e, f)
+  Set{Int64} with 2 elements:
+    3
+    1
+  ```
 <br>
 
 Finally, create an object of SimplexTableau type from the BFS, and return it.  
