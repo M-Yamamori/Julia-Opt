@@ -80,6 +80,32 @@ c = Array{Float64}(c)
 A = Array{Float64}(A)
 b = Array{Float64}(b)
 ```
+```Array{Float64}``` will change the type, if the type is others.  
+```julia
+julia> a = [1; 2; 3; 4]
+4-element Vector{Int64}:
+ 1
+ 2
+ 3
+ 4
+
+julia> a = Array{Float64}(a)
+4-element Vector{Float64}:
+ 1.0
+ 2.0
+ 3.0
+ 4.0
+
+julia> b = [1 2 3 4; 5 6 7 8]
+2×4 Matrix{Int64}:
+ 1  2  3  4
+ 5  6  7  8
+
+julia> b = Array{Float64}(b)
+2×4 Matrix{Float64}:
+ 1.0  2.0  3.0  4.0
+ 5.0  6.0  7.0  8.0
+```
 
 To find an initial BFS, we create new function ```initial_BFS```.  
 ```julia
