@@ -108,7 +108,7 @@ function pivoting!(t::SimplexTableau)
 end
 
 function pivot_point(t::SimplexTableau)
-  entering = findfirst( t.z_c .> 0)[2]
+  entering = findfirst(t.z_c .> 0)[2]
   if entering == 0
     error("Optimal")
   end
