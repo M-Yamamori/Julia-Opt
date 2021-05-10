@@ -73,13 +73,29 @@ First, we create a graph and add the links by using ```Graph``` method of the pa
 ```julia
 graph = Graph(no_node)
 distmx = Inf * ones(no_node, no_node)
+```
+```distmx``` is default weight. 
 
+```julia
+julia> graph = Graph(no_node)
+{5, 0} undirected simple Int64 graph
+
+julia> distmx = Inf * ones(no_node, no_node)
+5×5 Matrix{Float64}:
+ Inf  Inf  Inf  Inf  Inf
+ Inf  Inf  Inf  Inf  Inf
+ Inf  Inf  Inf  Inf  Inf
+ Inf  Inf  Inf  Inf  Inf
+ Inf  Inf  Inf  Inf  Inf
+```
+
+```julia
 for i = 1:no_link
   add_edge!(graph, start_node[i], end_node[i])
   distmx[start_node[i], end_node[i]] = c[i]
 end
 ```
-```distmx``` is default weight.  
+ 
 ```julia
 julia> graph
 {5, 8} undirected simple Int64 graph
