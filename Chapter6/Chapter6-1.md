@@ -136,7 +136,7 @@ CachingOptimizer state: EMPTY_OPTIMIZER
 Solver name: GLPK
 ```
 
-There are still no variables and an objective,so we define and add the decision variables and the objective.  
+There are still no variables and an objective, so we define and add the decision variables and the objective.  
 ```julia
 @variable(mcnf, 0 <= x[link in links] <= u_dict[link])
 @objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))
