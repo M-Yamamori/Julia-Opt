@@ -3,7 +3,7 @@ In this chapter, we will find some common network optimization problems and lear
 <br>
 
 ## 6.1 The Minimal-Cost Network-Flow Problem  
-First, we read and arrange the CSV file with the data of nodes,"simple_network.csv" and "simple_network_2.csv". We use CSV package and DataFrames package.  
+First, we read and arrange the CSV file with the data of nodes, "simple_network.csv" and "simple_network_2.csv". We use CSV package and DataFrames package.  
 ```julia
 using CSV, DataFrames
 network_data = CSV.read("simple_network.csv", DataFrame)
