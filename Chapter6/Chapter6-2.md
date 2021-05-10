@@ -85,6 +85,3 @@ from Buffalo to Denver: 0.0
 from Buffalo to Erie: 10.0
 ```
 <br>
-
-- Note  
-   - What is in the JuMP package.  
