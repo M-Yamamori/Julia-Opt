@@ -77,10 +77,10 @@ distmx = Inf * ones(no_node, no_node)
 ```distmx``` is default weight. 
 
 ```julia
-julia> graph = Graph(no_node)
+julia> graph
 {5, 0} undirected simple Int64 graph
 
-julia> distmx = Inf * ones(no_node, no_node)
+julia> distmx
 5×5 Matrix{Float64}:
  Inf  Inf  Inf  Inf  Inf
  Inf  Inf  Inf  Inf  Inf
