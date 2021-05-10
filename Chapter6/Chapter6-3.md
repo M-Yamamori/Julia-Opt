@@ -27,7 +27,7 @@ julia> start_node = network_data[2:end, 1]
  5
 ```
 ```julia
-julia> start_node = round.(Int64,network_data[2:end, 1])
+julia> start_node = round.(Int64, network_data[2:end, 1])
 8-element Vector{Int64}:
  1
  1
@@ -43,7 +43,7 @@ julia> start_node = round.(Int64,network_data[2:end, 1])
   ```julia
   julia> for i = 1:7
            start_node[i] = round(Int64, network_data[i+1, 1])
-       end
+         end
   
   julia> start_node
    8-element Vector{Int64}:
