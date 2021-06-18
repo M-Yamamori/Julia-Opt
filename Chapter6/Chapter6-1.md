@@ -3,7 +3,7 @@ In this chapter, we will find some common network optimization problems and lear
 <br>
 
 ## 6.1 The Minimal-Cost Network-Flow Problem  
-First, we read and arrange the CSV file with the data of nodes,"simple_network.csv" and "simple_network_2.csv". We use CSV package and DataFrames package.  
+First, we read and arrange the CSV files with the data of nodes, "simple_network.csv" and "simple_network_2.csv". We use CSV package and DataFrames package.  
 ```julia
 using CSV, DataFrames
 network_data = CSV.read("simple_network.csv", DataFrame)
@@ -103,6 +103,7 @@ Dict{Tuple{Int64,Int64},Int64} with 8 entries:
   (4, 1) => 0
   (1, 3) => 5
   (3, 4) => 1
+
 julia> u_dict
 Dict{Tuple{Int64,Int64},Float64} with 8 entries:
   (3, 5) => 1.0
@@ -135,7 +136,7 @@ CachingOptimizer state: EMPTY_OPTIMIZER
 Solver name: GLPK
 ```
 
-There are still no variables and an objective,so we define and add the decision variables and the objective.  
+There are still no variables and an objective, so we define and add the decision variables and the objective.  
 ```julia
 @variable(mcnf, 0 <= x[link in links] <= u_dict[link])
 @objective(mcnf, Min, sum(c_dict[link] * x[link] for link in links))

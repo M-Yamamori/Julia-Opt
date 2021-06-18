@@ -76,6 +76,7 @@ In our function of Dijkstra’s algorithm, we first get the weight, w from N, A,
 ```julia
 w = Array{Float64}(undef, no_node)
 ```
+[undef](https://docs.julialang.org/en/v1/base/arrays/#Core.undef) will construct an instance of the singleton type.  
 <br>
 
 Start with step 0. The weight of origin node is 0. We prepare arrays X to store confirmed nodes and Xbar to store not confirmed nodes.  
