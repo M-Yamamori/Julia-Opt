@@ -195,7 +195,12 @@ The result will be
 
 
 ## 7.2 Convex Optimization  
-By using juMP and [Ipopt package](https://www.zib.de/vigerske/ipopt3.14/index.html), we want to handle second-order conic programming (SOCP) which involves convex quadratic constraints and objective functions. We want to consider [this convex optimization problem](https://scrapbox.io/kklab-ise-ag/Chapter_7).  
+By using juMP and [Ipopt package](https://www.zib.de/vigerske/ipopt3.14/index.html), we want to handle second-order conic programming (SOCP) which involves convex quadratic constraints and objective functions.  
+- Note  
+   Compared to other nonlinear problems, SOCPs can be solved more efficiently.  
+<br>
+
+We want to consider [this convex optimization problem](https://scrapbox.io/kklab-ise-ag/Chapter_7).  
 <br>
 
 We first create a model by Ipopt optimizer.  
@@ -208,23 +213,17 @@ m = Model(Ipopt.Optimizer)
 Then, add variable, nonlinear objective function, and constraints.  
 ```julia
 @variable(m, x[1:2])
-@NLobjective(m, Min, (x[1]-3)^3 + (x[2]-4)^2)
-@NLconstraint(m, (x[1]-1)^2 + (x[2]+1)^3 + exp(-x[1]) <= 1)
+@objective(m, Min, (x[1]-3)^2 + (x[2]-4)^2)
+@constraint(m, (x[1]-1)^2 + (x[2]+1)^2 <= 1)
 ```
-This time, the objective function and constraint function is not linear, so we use ```@NLobjective``` and ```@NLconstraint``` macros.  
-- Note  
-   ```julia
-   julia> @objective(m, Min, (x[1]-3)^3 + (x[2]-4)^2)
-   ERROR: Only exponents of 0, 1, or 2 are currently supported. Are you trying to build a nonlinear problem? Make sure you use @NLconstraint/@NLobjective.
-   ```
 
 ```
 julia> m
 A JuMP Model
 Minimization problem with:
 Variables: 2
-Objective function type: Nonlinear
-Nonlinear: 1 constraint
+Objective function type: QuadExpr
+`QuadExpr`-in-`MathOptInterface.LessThan{Float64}`: 1 constraint
 Model mode: AUTOMATIC
 CachingOptimizer state: EMPTY_OPTIMIZER
 Solver name: Ipopt
@@ -235,8 +234,8 @@ Names registered in the model: x
 Optimize it and print the results.
 ```julia
 JuMP.optimize!(m)
-println("** Optimal objective function value = ", JuMP.objective_value(m))
-println("** Optimal solution = ", JuMP.value.(x))
+println("Optimal objective function value = ", JuMP.objective_value(m))
+println("Optimal solution = ", JuMP.value.(x))
 ```
 ```julia
 ******************************************************************************
@@ -246,59 +245,82 @@ This program contains Ipopt, a library for large-scale nonlinear optimization.
 ******************************************************************************
 
 This is Ipopt version 3.13.4, running with linear solver mumps.
-NOTE: Other linear solvers might be more efficient (see Ipopt documentation).
+NOTE: Other linear solvers might be more efficient (see 
+Ipopt documentation).
 
-Number of nonzeros in equality constraint Jacobian...:        0
-Number of nonzeros in inequality constraint Jacobian.:        2
-Number of nonzeros in Lagrangian Hessian.............:        4
+Number of nonzeros in equality constraint Jacobian...:  
+      0
+Number of nonzeros in inequality constraint Jacobian.:  
+      4
+Number of nonzeros in Lagrangian Hessian.............:  
+      4
 
-Total number of variables............................:        2
-                     variables with only lower bounds:        0
-                variables with lower and upper bounds:        0
-                     variables with only upper bounds:        0
-Total number of equality constraints.................:        0
-Total number of inequality constraints...............:        1
-        inequality constraints with only lower bounds:        0
-   inequality constraints with lower and upper bounds:        0
-        inequality constraints with only upper bounds:        1
+Total number of variables............................:  
+      2
+                     variables with only lower bounds:  
+      0
+                variables with lower and upper bounds:  
+      0
+                     variables with only upper bounds:  
+      0
+Total number of equality constraints.................:  
+      0
+Total number of inequality constraints...............:  
+      1
+        inequality constraints with only lower bounds:  
+      0
+   inequality constraints with lower and upper bounds:  
+      0
+        inequality constraints with only upper bounds:  
+      1
 
 iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
-   0 -1.1000000e+01 2.00e+00 1.03e+01  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
-   1 -2.7940943e+00 7.05e-01 3.15e+00  -1.0 5.31e-01    -  1.00e+00 1.00e+00h  1
-   2  3.0252074e+00 1.24e-01 1.20e+00  -1.0 2.96e-01    -  1.00e+00 1.00e+00h  1
-   3  4.4351082e+00 0.00e+00 1.50e-01  -1.0 5.43e-02    -  1.00e+00 1.00e+00h  1
-   4  4.4112067e+00 0.00e+00 2.19e-04  -2.5 8.60e-03    -  1.00e+00 1.00e+00h  1
-   5  4.4092612e+00 0.00e+00 2.49e-07  -3.8 1.69e-04    -  1.00e+00 1.00e+00f  1
-   6  4.4091126e+00 0.00e+00 1.24e-09  -5.7 1.28e-05    -  1.00e+00 1.00e+00h  1
-   7  4.4091108e+00 0.00e+00 1.95e-13  -8.6 1.59e-07    -  1.00e+00 1.00e+00h  1
+   0  2.5000000e+01 1.00e+00 7.11e+00  -1.0 0.00e+00    
+-  0.00e+00 0.00e+00   0
+   1  4.3268076e+00 1.02e+01 1.88e+00  -1.0 2.53e+00    
+-  1.00e+00 1.00e+00f  1
+   2  1.2644870e+01 2.36e+00 1.39e+00  -1.0 1.24e+00    
+-  1.00e+00 1.00e+00h  1
+   3  1.7634427e+01 4.09e-01 1.73e+00  -1.0 6.50e-01    
+-  1.00e+00 1.00e+00h  1
+   4  1.9176007e+01 1.26e-02 3.73e-01  -1.0 1.43e-01    
+-  1.00e+00 1.00e+00h  1
+   5  1.9242481e+01 0.00e+00 7.34e-03  -1.7 2.07e-02    
+-  1.00e+00 1.00e+00h  1
+   6  1.9229827e+01 0.00e+00 1.90e-05  -3.8 3.24e-03    
+-  1.00e+00 1.00e+00h  1
+   7  1.9229672e+01 0.00e+00 2.90e-09  -5.7 3.81e-05    
+-  1.00e+00 1.00e+00h  1
+   8  1.9229670e+01 0.00e+00 4.41e-13  -8.6 4.21e-07    
+-  1.00e+00 1.00e+00h  1
 
-Number of Iterations....: 7
+Number of Iterations....: 8
 
-                                   (scaled)                 (unscaled)
-Objective...............:   4.4091107643665541e+00    4.4091107643665541e+00
-Dual infeasibility......:   1.9539925233402755e-13    1.9539925233402755e-13
+                                   (scaled)             
+    (unscaled)
+Objective...............:   1.9229670344385529e+01    1.9229670344385529e+01
+Dual infeasibility......:   4.4053649617126212e-13    . 
+4053649617126212e-13
 Constraint violation....:   0.0000000000000000e+00    0.0000000000000000e+00
-Complementarity.........:   2.5060365853569629e-09    2.5060365853569629e-09
-Overall NLP error.......:   2.5060365853569629e-09    2.5060365853569629e-09
+Complementarity.........:   2.5063795217232523e-09    2.5063795217232523e-09
+Overall NLP error.......:   2.5063795217232523e-09    2.5063795217232523e-09
 
 
-Number of objective function evaluations             = 8
-Number of objective gradient evaluations             = 8
-Number of equality constraint evaluations            = 0
-Number of inequality constraint evaluations          = 8
-Number of equality constraint Jacobian evaluations   = 0
-Number of inequality constraint Jacobian evaluations = 8
-Number of Lagrangian Hessian evaluations             = 7
-Total CPU secs in IPOPT (w/o function evaluations)   =      3.249
-Total CPU secs in NLP function evaluations           =      2.088
+Number of objective function evaluations             = 9Number of objective gradient evaluations             = 9Number of equality constraint evaluations            = 0Number of inequality constraint evaluations          = 9Number of equality constraint Jacobian evaluations   = 0Number of inequality constraint Jacobian evaluations = 9Number of Lagrangian Hessian evaluations             = 8Total CPU secs in IPOPT (w/o function evaluations)   =  
+    0.846
+Total CPU secs in NLP function evaluations           =  
+    0.238
 
 EXIT: Optimal Solution Found.
-** Optimal objective function value = 4.409110764366554
-** Optimal solution = [0.49239864764413793, -0.4918893479728137]
+Optimal objective function value = 19.22967034438553
+Optimal solution = [1.3713906781049294, -0.07152330473767617]
 ```
 <br>
 
 Ipopt package has [some more options](https://www.zib.de/vigerske/ipopt3.14/OPTIONS.html) to solve problems.  
+<br>
+- Note  
+   This package does not have some options to solve SOCPs efficiently.  
 <br>
 <br>
 <br>
@@ -335,6 +357,12 @@ Then, we add variables, objective, and constraint.
 @NLobjective(m, Min, (x[1]-3)^3 + (x[2]-4)^2)
 @NLconstraint(m, (x[1]-1)^2 + (x[2]+1)^3 + exp(-x[1]) <= 1)
 ```
+This time, the objective function and constraint function is not linear, so we use ```@NLobjective``` and ```@NLconstraint``` macros.  
+- Note  
+   ```julia
+   julia> @objective(m, Min, (x[1]-3)^3 + (x[2]-4)^2)
+   ERROR: Only exponents of 0, 1, or 2 are currently supported. Are you trying to build a nonlinear problem? Make sure you use @NLconstraint/@NLobjective.
+   ```
 <br>
 
 After we add them, model m looks like following.
@@ -362,66 +390,6 @@ println("Optimal solution = ", JuMP.value.(x))
 <br>
 
 The result was,
-```julia
-******************************************************************************
-This program contains Ipopt, a library for large-scale nonlinear optimization.
- Ipopt is released as open source code under the Eclipse Public License (EPL).
-         For more information visit https://github.com/coin-or/Ipopt
-******************************************************************************
-
-This is Ipopt version 3.13.4, running with linear solver mumps.
-NOTE: Other linear solvers might be more efficient (see Ipopt documentation).
-
-Number of nonzeros in equality constraint Jacobian...:        0
-Number of nonzeros in inequality constraint Jacobian.:        2
-Number of nonzeros in Lagrangian Hessian.............:        4
-
-Total number of variables............................:        2
-                     variables with only lower bounds:        0
-                variables with lower and upper bounds:        0
-                     variables with only upper bounds:        0
-Total number of equality constraints.................:        0
-Total number of inequality constraints...............:        1
-        inequality constraints with only lower bounds:        0
-   inequality constraints with lower and upper bounds:        0
-        inequality constraints with only upper bounds:        1
-
-iter    objective    inf_pr   inf_du lg(mu)  ||d||  lg(rg) alpha_du alpha_pr  ls
-   0  2.5000000e+01 1.00e+00 7.11e+00  -1.0 0.00e+00    -  0.00e+00 0.00e+00   0
-   1  4.3268076e+00 1.02e+01 1.88e+00  -1.0 2.53e+00    -  1.00e+00 1.00e+00f  1
-   2  1.2644870e+01 2.36e+00 1.39e+00  -1.0 1.24e+00    -  1.00e+00 1.00e+00h  1
-   3  1.7634427e+01 4.09e-01 1.73e+00  -1.0 6.50e-01    -  1.00e+00 1.00e+00h  1
-   4  1.9176007e+01 1.26e-02 3.73e-01  -1.0 1.43e-01    -  1.00e+00 1.00e+00h  1
-   5  1.9242481e+01 0.00e+00 7.34e-03  -1.7 2.07e-02    -  1.00e+00 1.00e+00h  1
-   6  1.9229827e+01 0.00e+00 1.90e-05  -3.8 3.24e-03    -  1.00e+00 1.00e+00h  1
-   7  1.9229672e+01 0.00e+00 2.90e-09  -5.7 3.81e-05    -  1.00e+00 1.00e+00h  1
-   8  1.9229670e+01 0.00e+00 4.41e-13  -8.6 4.21e-07    -  1.00e+00 1.00e+00h  1
-
-Number of Iterations....: 8
-
-                                   (scaled)                 (unscaled)
-Objective...............:   1.9229670344385529e+01    1.9229670344385529e+01
-Dual infeasibility......:   4.4053649617126212e-13    4.4053649617126212e-13
-Constraint violation....:   0.0000000000000000e+00    0.0000000000000000e+00
-Complementarity.........:   2.5063795779326750e-09    2.5063795779326750e-09
-Overall NLP error.......:   2.5063795779326750e-09    2.5063795779326750e-09
-
-
-Number of objective function evaluations             = 9
-Number of objective gradient evaluations             = 9
-Number of equality constraint evaluations            = 0
-Number of inequality constraint evaluations          = 9
-Number of equality constraint Jacobian evaluations   = 0
-Number of inequality constraint Jacobian evaluations = 9
-Number of Lagrangian Hessian evaluations             = 8
-Total CPU secs in IPOPT (w/o function evaluations)   =      2.352
-Total CPU secs in NLP function evaluations           =      0.112
-
-EXIT: Optimal Solution Found.
-Optimal objective function value = 19.22967034438553
-Optimal solution = [1.3713906781049294, -0.07152330473767621]
-```
-
 ```julia
 ******************************************************************************
 This program contains Ipopt, a library for large-scale nonlinear optimization.
