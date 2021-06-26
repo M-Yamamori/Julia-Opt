@@ -2,7 +2,7 @@ using JuMP, Ipopt
 m = Model(Ipopt.Optimizer)
 
 @variable(m, x[1:2])
-@NLobjective(m, Min, (x[1]-3)^3 + (x[2]-4)^2)
+@NLobjective(m, Min, (x[1]-3)^2 + (x[2]-4)^2)
 @NLconstraint(m, (x[1]-1)^2 + (x[2]+1)^3 + exp(-x[1]) <= 1)
 
 optimize!(m)
