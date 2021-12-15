@@ -9,7 +9,6 @@ The most popular definition of the best match or best fit is based on the **leas
 <br>
 
 - [Function form](https://scrapbox.io/kklab-ise-ag/Chapter_4)  
-[$ f(x) = \beta_1(\frac{x}{\beta_2})^{\beta_3-1}exp(-(\frac{x}{\beta_2})^{\beta_3})]  
 <br>
 
 - Code  
